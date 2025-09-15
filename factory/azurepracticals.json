@@ -1,0 +1,9 @@
+{
+	"name": "azurepracticals",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c31dd8a4-b821-46ec-be81-edd8b1dbfcce",
+		"tenantId": "942d800a-85f0-42e4-8416-f28be9bc1fdc"
+	}
+}
