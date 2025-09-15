@@ -8,6 +8,9 @@
 		"CopyDataBlobToBlob_connectionString": {
 			"value": ""
 		},
+		"filtersortdataflow_connectionString": {
+			"value": ""
+		},
 		"containerUri": {
 			"value": ""
 		},
