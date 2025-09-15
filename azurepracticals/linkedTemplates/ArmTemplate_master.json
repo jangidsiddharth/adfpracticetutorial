@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'filtersortdataflow'"
 		},
+		"jointransformation_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'jointransformation'"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -47,6 +51,9 @@
 					},
 					"filtersortdataflow_connectionString": {
 						"value": "[parameters('filtersortdataflow_connectionString')]"
+					},
+					"jointransformation_connectionString": {
+						"value": "[parameters('jointransformation_connectionString')]"
 					}
 				}
 			},

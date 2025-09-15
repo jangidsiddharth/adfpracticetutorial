@@ -11,6 +11,9 @@
 		"filtersortdataflow_connectionString": {
 			"value": ""
 		},
+		"jointransformation_connectionString": {
+			"value": ""
+		},
 		"containerUri": {
 			"value": ""
 		},
