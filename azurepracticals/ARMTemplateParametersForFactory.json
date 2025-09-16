@@ -13,6 +13,9 @@
 		},
 		"jointransformation_connectionString": {
 			"value": ""
+		},
+		"uniontransform_connectionString": {
+			"value": ""
 		}
 	}
 }
