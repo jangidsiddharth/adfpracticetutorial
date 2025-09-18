@@ -15,6 +15,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CopyDataBlobToBlob'"
 		},
+		"ParameterizedDataset_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ParameterizedDataset'"
+		},
+		"TableCopyUsingParameterized_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'TableCopyUsingParameterized'"
+		},
 		"filtersortdataflow_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'filtersortdataflow'"
@@ -23,9 +31,37 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'jointransformation'"
 		},
+		"parameterized_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'parameterized'"
+		},
 		"uniontransform_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'uniontransform'"
+		},
+		"ParameterizedDBConnection_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azuredbserver123.database.windows.net"
+		},
+		"ParameterizedDBConnection_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "@{linkedService().db_name}"
+		},
+		"ParameterizedDBConnection_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "@{linkedService().user_name}"
+		},
+		"ParameterizedDataset_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azuredbserver123.database.windows.net"
+		},
+		"ParameterizedDataset_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azuredb"
+		},
+		"ParameterizedDataset_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "SIDDHARTH"
 		},
 		"containerUri": {
 			"type": "string",
@@ -60,14 +96,41 @@
 					"CopyDataBlobToBlob_connectionString": {
 						"value": "[parameters('CopyDataBlobToBlob_connectionString')]"
 					},
+					"ParameterizedDataset_password": {
+						"value": "[parameters('ParameterizedDataset_password')]"
+					},
+					"TableCopyUsingParameterized_connectionString": {
+						"value": "[parameters('TableCopyUsingParameterized_connectionString')]"
+					},
 					"filtersortdataflow_connectionString": {
 						"value": "[parameters('filtersortdataflow_connectionString')]"
 					},
 					"jointransformation_connectionString": {
 						"value": "[parameters('jointransformation_connectionString')]"
 					},
+					"parameterized_connectionString": {
+						"value": "[parameters('parameterized_connectionString')]"
+					},
 					"uniontransform_connectionString": {
 						"value": "[parameters('uniontransform_connectionString')]"
+					},
+					"ParameterizedDBConnection_properties_typeProperties_server": {
+						"value": "[parameters('ParameterizedDBConnection_properties_typeProperties_server')]"
+					},
+					"ParameterizedDBConnection_properties_typeProperties_database": {
+						"value": "[parameters('ParameterizedDBConnection_properties_typeProperties_database')]"
+					},
+					"ParameterizedDBConnection_properties_typeProperties_userName": {
+						"value": "[parameters('ParameterizedDBConnection_properties_typeProperties_userName')]"
+					},
+					"ParameterizedDataset_properties_typeProperties_server": {
+						"value": "[parameters('ParameterizedDataset_properties_typeProperties_server')]"
+					},
+					"ParameterizedDataset_properties_typeProperties_database": {
+						"value": "[parameters('ParameterizedDataset_properties_typeProperties_database')]"
+					},
+					"ParameterizedDataset_properties_typeProperties_userName": {
+						"value": "[parameters('ParameterizedDataset_properties_typeProperties_userName')]"
 					}
 				}
 			},
