@@ -8,6 +8,9 @@
 		"Aggregation_connectionString": {
 			"value": ""
 		},
+		"AzureDatabricks1_accessToken": {
+			"value": ""
+		},
 		"CopyDataBlobToBlob_connectionString": {
 			"value": ""
 		},
