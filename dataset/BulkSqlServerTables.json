@@ -1,0 +1,30 @@
+{
+	"name": "BulkSqlServerTables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "GetMetaDataSqlServerLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"tname": {
+				"type": "string"
+			},
+			"schema": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().schema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().tname",
+				"type": "Expression"
+			}
+		}
+	}
+}
