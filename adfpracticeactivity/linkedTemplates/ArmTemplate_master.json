@@ -15,9 +15,17 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
 		},
+		"AzureSqlDatabase1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase1'"
+		},
 		"CopyDataBlobToBlob_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CopyDataBlobToBlob'"
+		},
+		"GetMetaDataSqlServerLinkedService_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'GetMetaDataSqlServerLinkedService'"
 		},
 		"ParameterizedDataset_password": {
 			"type": "secureString",
@@ -50,6 +58,30 @@
 		"uniontransform_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'uniontransform'"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "siddharth"
+		},
+		"GetMetaDataSqlServerLinkedService_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity.database.windows.net"
+		},
+		"GetMetaDataSqlServerLinkedService_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity"
+		},
+		"GetMetaDataSqlServerLinkedService_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "siddharth"
 		},
 		"ParameterizedDBConnection_properties_typeProperties_server": {
 			"type": "string",
@@ -124,8 +156,14 @@
 					"AzureDatabricks1_accessToken": {
 						"value": "[parameters('AzureDatabricks1_accessToken')]"
 					},
+					"AzureSqlDatabase1_password": {
+						"value": "[parameters('AzureSqlDatabase1_password')]"
+					},
 					"CopyDataBlobToBlob_connectionString": {
 						"value": "[parameters('CopyDataBlobToBlob_connectionString')]"
+					},
+					"GetMetaDataSqlServerLinkedService_password": {
+						"value": "[parameters('GetMetaDataSqlServerLinkedService_password')]"
 					},
 					"ParameterizedDataset_password": {
 						"value": "[parameters('ParameterizedDataset_password')]"
@@ -150,6 +188,24 @@
 					},
 					"uniontransform_connectionString": {
 						"value": "[parameters('uniontransform_connectionString')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]"
+					},
+					"GetMetaDataSqlServerLinkedService_properties_typeProperties_server": {
+						"value": "[parameters('GetMetaDataSqlServerLinkedService_properties_typeProperties_server')]"
+					},
+					"GetMetaDataSqlServerLinkedService_properties_typeProperties_database": {
+						"value": "[parameters('GetMetaDataSqlServerLinkedService_properties_typeProperties_database')]"
+					},
+					"GetMetaDataSqlServerLinkedService_properties_typeProperties_userName": {
+						"value": "[parameters('GetMetaDataSqlServerLinkedService_properties_typeProperties_userName')]"
 					},
 					"ParameterizedDBConnection_properties_typeProperties_server": {
 						"value": "[parameters('ParameterizedDBConnection_properties_typeProperties_server')]"

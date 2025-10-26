@@ -11,7 +11,13 @@
 		"AzureDatabricks1_accessToken": {
 			"value": ""
 		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
 		"CopyDataBlobToBlob_connectionString": {
+			"value": ""
+		},
+		"GetMetaDataSqlServerLinkedService_password": {
 			"value": ""
 		},
 		"ParameterizedDataset_password": {
@@ -37,6 +43,24 @@
 		},
 		"uniontransform_connectionString": {
 			"value": ""
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "sqlpracticeactivity.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "sqlpracticeactivity"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "siddharth"
+		},
+		"GetMetaDataSqlServerLinkedService_properties_typeProperties_server": {
+			"value": "sqlpracticeactivity.database.windows.net"
+		},
+		"GetMetaDataSqlServerLinkedService_properties_typeProperties_database": {
+			"value": "sqlpracticeactivity"
+		},
+		"GetMetaDataSqlServerLinkedService_properties_typeProperties_userName": {
+			"value": "siddharth"
 		},
 		"ParameterizedDBConnection_properties_typeProperties_server": {
 			"value": "azuredbserver123.database.windows.net"
