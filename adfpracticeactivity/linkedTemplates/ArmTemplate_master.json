@@ -1,0 +1,229 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfpracticeactivity"
+		},
+		"Aggregation_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Aggregation'"
+		},
+		"AzureDatabricks1_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
+		},
+		"CopyDataBlobToBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CopyDataBlobToBlob'"
+		},
+		"ParameterizedDataset_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ParameterizedDataset'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"TableCopyUsingParameterized_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'TableCopyUsingParameterized'"
+		},
+		"filtersortdataflow_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'filtersortdataflow'"
+		},
+		"jointransformation_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'jointransformation'"
+		},
+		"parameterized_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'parameterized'"
+		},
+		"sinkonpremise_LS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'sinkonpremise_LS'"
+		},
+		"uniontransform_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'uniontransform'"
+		},
+		"ParameterizedDBConnection_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azuredbserver123.database.windows.net"
+		},
+		"ParameterizedDBConnection_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "@{linkedService().db_name}"
+		},
+		"ParameterizedDBConnection_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "@{linkedService().user_name}"
+		},
+		"ParameterizedDataset_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azuredbserver123.database.windows.net"
+		},
+		"ParameterizedDataset_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azuredb"
+		},
+		"ParameterizedDataset_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "SIDDHARTH"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity.database.windows.net"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "siddharth"
+		},
+		"sinkonpremise_LS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storagepracticeactivity.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adfpracticeactivity_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Aggregation_connectionString": {
+						"value": "[parameters('Aggregation_connectionString')]"
+					},
+					"AzureDatabricks1_accessToken": {
+						"value": "[parameters('AzureDatabricks1_accessToken')]"
+					},
+					"CopyDataBlobToBlob_connectionString": {
+						"value": "[parameters('CopyDataBlobToBlob_connectionString')]"
+					},
+					"ParameterizedDataset_password": {
+						"value": "[parameters('ParameterizedDataset_password')]"
+					},
+					"SqlServer1_password": {
+						"value": "[parameters('SqlServer1_password')]"
+					},
+					"TableCopyUsingParameterized_connectionString": {
+						"value": "[parameters('TableCopyUsingParameterized_connectionString')]"
+					},
+					"filtersortdataflow_connectionString": {
+						"value": "[parameters('filtersortdataflow_connectionString')]"
+					},
+					"jointransformation_connectionString": {
+						"value": "[parameters('jointransformation_connectionString')]"
+					},
+					"parameterized_connectionString": {
+						"value": "[parameters('parameterized_connectionString')]"
+					},
+					"sinkonpremise_LS_accountKey": {
+						"value": "[parameters('sinkonpremise_LS_accountKey')]"
+					},
+					"uniontransform_connectionString": {
+						"value": "[parameters('uniontransform_connectionString')]"
+					},
+					"ParameterizedDBConnection_properties_typeProperties_server": {
+						"value": "[parameters('ParameterizedDBConnection_properties_typeProperties_server')]"
+					},
+					"ParameterizedDBConnection_properties_typeProperties_database": {
+						"value": "[parameters('ParameterizedDBConnection_properties_typeProperties_database')]"
+					},
+					"ParameterizedDBConnection_properties_typeProperties_userName": {
+						"value": "[parameters('ParameterizedDBConnection_properties_typeProperties_userName')]"
+					},
+					"ParameterizedDataset_properties_typeProperties_server": {
+						"value": "[parameters('ParameterizedDataset_properties_typeProperties_server')]"
+					},
+					"ParameterizedDataset_properties_typeProperties_database": {
+						"value": "[parameters('ParameterizedDataset_properties_typeProperties_database')]"
+					},
+					"ParameterizedDataset_properties_typeProperties_userName": {
+						"value": "[parameters('ParameterizedDataset_properties_typeProperties_userName')]"
+					},
+					"SqlServer1_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
+					},
+					"SqlServer1_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_database')]"
+					},
+					"SqlServer1_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					},
+					"sinkonpremise_LS_properties_typeProperties_url": {
+						"value": "[parameters('sinkonpremise_LS_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "adfpracticeactivity_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfpracticeactivity_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "adfpracticeactivity_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfpracticeactivity_ArmTemplate_1')]"
+			]
+		}
+	]
+}
