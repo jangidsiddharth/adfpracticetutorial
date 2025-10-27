@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CopyDataBlobToBlob'"
 		},
+		"ErrorRowDataLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ErrorRowDataLS'"
+		},
 		"GetMetaDataSqlServerLinkedService_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'GetMetaDataSqlServerLinkedService'"
@@ -31,9 +35,17 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'ParameterizedDataset'"
 		},
+		"PrametersSqlTables_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'PrametersSqlTables'"
+		},
 		"SqlServer1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"SqlServerConnection_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServerConnection'"
 		},
 		"TableCopyUsingParameterized_connectionString": {
 			"type": "secureString",
@@ -107,6 +119,18 @@
 			"type": "string",
 			"defaultValue": "SIDDHARTH"
 		},
+		"PrametersSqlTables_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity.database.windows.net"
+		},
+		"PrametersSqlTables_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity"
+		},
+		"PrametersSqlTables_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "siddharth"
+		},
 		"SqlServer1_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "sqlpracticeactivity.database.windows.net"
@@ -116,6 +140,18 @@
 			"defaultValue": "sqlpracticeactivity"
 		},
 		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "siddharth"
+		},
+		"SqlServerConnection_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity.database.windows.net"
+		},
+		"SqlServerConnection_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity"
+		},
+		"SqlServerConnection_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "siddharth"
 		},
@@ -1312,6 +1348,100 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ErrorRowTableDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ErrorRowDataLS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "dbo.ErrorRow.csv",
+						"folderPath": "employee",
+						"container": "onpremisetarget"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "stuId",
+						"type": "String"
+					},
+					{
+						"name": "stuName",
+						"type": "String"
+					},
+					{
+						"name": "age",
+						"type": "String"
+					},
+					{
+						"name": "email",
+						"type": "String"
+					},
+					{
+						"name": "DateOfBirth",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ErrorRowDataLS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GoodRowTableDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServerConnection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "stuId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "stuName",
+						"type": "text"
+					},
+					{
+						"name": "age",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "email",
+						"type": "varchar"
+					},
+					{
+						"name": "DOB",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "GoodRowData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServerConnection')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ParameterizedAzureTable')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1516,6 +1646,19 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ErrorRowDataLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ErrorRowDataLS_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/GetMetaDataSqlServerLinkedService')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1590,6 +1733,28 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PrametersSqlTables')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('PrametersSqlTables_properties_typeProperties_server')]",
+					"database": "[parameters('PrametersSqlTables_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('PrametersSqlTables_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('PrametersSqlTables_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SqlServer1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1606,6 +1771,28 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('SqlServer1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerConnection')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('SqlServerConnection_properties_typeProperties_server')]",
+					"database": "[parameters('SqlServerConnection_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('SqlServerConnection_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SqlServerConnection_password')]"
 					}
 				}
 			},
@@ -1694,6 +1881,116 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ErrorRowData')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "ErrorRowTableDS",
+								"type": "DatasetReference"
+							},
+							"name": "ErrorDataSet"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "ErrorRowTableDS",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						},
+						{
+							"dataset": {
+								"referenceName": "GoodRowTableDS",
+								"type": "DatasetReference"
+							},
+							"name": "sink2"
+						}
+					],
+					"transformations": [
+						{
+							"name": "split1"
+						},
+						{
+							"name": "derivedColumn1"
+						},
+						{
+							"name": "derivedColumn2"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          stuId as string,",
+						"          stuName as string,",
+						"          age as string,",
+						"          email as string,",
+						"          DateOfBirth as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> ErrorDataSet",
+						"ErrorDataSet split(isNull(toDate(DateOfBirth,'dd-MM-yyyy')),",
+						"     disjoint: false) ~> split1@(ErrorRow, GoodRow)",
+						"split1@ErrorRow derive(stuId = toInteger(stuId),",
+						"          age = toInteger(age)) ~> derivedColumn1",
+						"split1@GoodRow derive(stuId = toInteger(stuId),",
+						"          age = toInteger(age),",
+						"          DateOfBirth = toDate(DateOfBirth,'dd-MM-yyyy')) ~> derivedColumn2",
+						"derivedColumn1 sink(allowSchemaDrift: false,",
+						"     validateSchema: false,",
+						"     input(",
+						"          stuId as string,",
+						"          stuName as string,",
+						"          age as string,",
+						"          email as string,",
+						"          DateOfBirth as string",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     mapColumn(",
+						"          stuId,",
+						"          stuName,",
+						"          age,",
+						"          email,",
+						"          DateOfBirth",
+						"     )) ~> sink1",
+						"derivedColumn2 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          stuId as integer,",
+						"          stuName as string,",
+						"          age as integer,",
+						"          email as string,",
+						"          DOB as date",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     mapColumn(",
+						"          stuId,",
+						"          stuName,",
+						"          age,",
+						"          email,",
+						"          DOB = DateOfBirth",
+						"     )) ~> sink2"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ErrorRowTableDS')]",
+				"[concat(variables('factoryId'), '/datasets/GoodRowTableDS')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/aggregation')]",

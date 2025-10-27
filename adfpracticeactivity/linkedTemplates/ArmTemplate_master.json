@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CopyDataBlobToBlob'"
 		},
+		"ErrorRowDataLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ErrorRowDataLS'"
+		},
 		"GetMetaDataSqlServerLinkedService_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'GetMetaDataSqlServerLinkedService'"
@@ -31,9 +35,17 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'ParameterizedDataset'"
 		},
+		"PrametersSqlTables_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'PrametersSqlTables'"
+		},
 		"SqlServer1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"SqlServerConnection_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServerConnection'"
 		},
 		"TableCopyUsingParameterized_connectionString": {
 			"type": "secureString",
@@ -107,6 +119,18 @@
 			"type": "string",
 			"defaultValue": "SIDDHARTH"
 		},
+		"PrametersSqlTables_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity.database.windows.net"
+		},
+		"PrametersSqlTables_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity"
+		},
+		"PrametersSqlTables_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "siddharth"
+		},
 		"SqlServer1_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "sqlpracticeactivity.database.windows.net"
@@ -116,6 +140,18 @@
 			"defaultValue": "sqlpracticeactivity"
 		},
 		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "siddharth"
+		},
+		"SqlServerConnection_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity.database.windows.net"
+		},
+		"SqlServerConnection_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqlpracticeactivity"
+		},
+		"SqlServerConnection_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "siddharth"
 		},
@@ -162,14 +198,23 @@
 					"CopyDataBlobToBlob_connectionString": {
 						"value": "[parameters('CopyDataBlobToBlob_connectionString')]"
 					},
+					"ErrorRowDataLS_connectionString": {
+						"value": "[parameters('ErrorRowDataLS_connectionString')]"
+					},
 					"GetMetaDataSqlServerLinkedService_password": {
 						"value": "[parameters('GetMetaDataSqlServerLinkedService_password')]"
 					},
 					"ParameterizedDataset_password": {
 						"value": "[parameters('ParameterizedDataset_password')]"
 					},
+					"PrametersSqlTables_password": {
+						"value": "[parameters('PrametersSqlTables_password')]"
+					},
 					"SqlServer1_password": {
 						"value": "[parameters('SqlServer1_password')]"
+					},
+					"SqlServerConnection_password": {
+						"value": "[parameters('SqlServerConnection_password')]"
 					},
 					"TableCopyUsingParameterized_connectionString": {
 						"value": "[parameters('TableCopyUsingParameterized_connectionString')]"
@@ -225,6 +270,15 @@
 					"ParameterizedDataset_properties_typeProperties_userName": {
 						"value": "[parameters('ParameterizedDataset_properties_typeProperties_userName')]"
 					},
+					"PrametersSqlTables_properties_typeProperties_server": {
+						"value": "[parameters('PrametersSqlTables_properties_typeProperties_server')]"
+					},
+					"PrametersSqlTables_properties_typeProperties_database": {
+						"value": "[parameters('PrametersSqlTables_properties_typeProperties_database')]"
+					},
+					"PrametersSqlTables_properties_typeProperties_userName": {
+						"value": "[parameters('PrametersSqlTables_properties_typeProperties_userName')]"
+					},
 					"SqlServer1_properties_typeProperties_server": {
 						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
 					},
@@ -233,6 +287,15 @@
 					},
 					"SqlServer1_properties_typeProperties_userName": {
 						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					},
+					"SqlServerConnection_properties_typeProperties_server": {
+						"value": "[parameters('SqlServerConnection_properties_typeProperties_server')]"
+					},
+					"SqlServerConnection_properties_typeProperties_database": {
+						"value": "[parameters('SqlServerConnection_properties_typeProperties_database')]"
+					},
+					"SqlServerConnection_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServerConnection_properties_typeProperties_userName')]"
 					},
 					"sinkonpremise_LS_properties_typeProperties_url": {
 						"value": "[parameters('sinkonpremise_LS_properties_typeProperties_url')]"

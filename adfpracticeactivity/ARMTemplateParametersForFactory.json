@@ -17,13 +17,22 @@
 		"CopyDataBlobToBlob_connectionString": {
 			"value": ""
 		},
+		"ErrorRowDataLS_connectionString": {
+			"value": ""
+		},
 		"GetMetaDataSqlServerLinkedService_password": {
 			"value": ""
 		},
 		"ParameterizedDataset_password": {
 			"value": ""
 		},
+		"PrametersSqlTables_password": {
+			"value": ""
+		},
 		"SqlServer1_password": {
+			"value": ""
+		},
+		"SqlServerConnection_password": {
 			"value": ""
 		},
 		"TableCopyUsingParameterized_connectionString": {
@@ -80,6 +89,15 @@
 		"ParameterizedDataset_properties_typeProperties_userName": {
 			"value": "SIDDHARTH"
 		},
+		"PrametersSqlTables_properties_typeProperties_server": {
+			"value": "sqlpracticeactivity.database.windows.net"
+		},
+		"PrametersSqlTables_properties_typeProperties_database": {
+			"value": "sqlpracticeactivity"
+		},
+		"PrametersSqlTables_properties_typeProperties_userName": {
+			"value": "siddharth"
+		},
 		"SqlServer1_properties_typeProperties_server": {
 			"value": "sqlpracticeactivity.database.windows.net"
 		},
@@ -87,6 +105,15 @@
 			"value": "sqlpracticeactivity"
 		},
 		"SqlServer1_properties_typeProperties_userName": {
+			"value": "siddharth"
+		},
+		"SqlServerConnection_properties_typeProperties_server": {
+			"value": "sqlpracticeactivity.database.windows.net"
+		},
+		"SqlServerConnection_properties_typeProperties_database": {
+			"value": "sqlpracticeactivity"
+		},
+		"SqlServerConnection_properties_typeProperties_userName": {
 			"value": "siddharth"
 		},
 		"sinkonpremise_LS_properties_typeProperties_url": {
