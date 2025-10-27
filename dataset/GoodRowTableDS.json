@@ -1,0 +1,39 @@
+{
+	"name": "GoodRowTableDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerConnection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "stuId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "stuName",
+				"type": "text"
+			},
+			{
+				"name": "age",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "email",
+				"type": "varchar"
+			},
+			{
+				"name": "DOB",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "GoodRowData"
+		}
+	}
+}

@@ -1,0 +1,45 @@
+{
+	"name": "ErrorRowTableDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ErrorRowDataLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "dbo.ErrorRow.csv",
+				"folderPath": "employee",
+				"container": "onpremisetarget"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "stuId",
+				"type": "String"
+			},
+			{
+				"name": "stuName",
+				"type": "String"
+			},
+			{
+				"name": "age",
+				"type": "String"
+			},
+			{
+				"name": "email",
+				"type": "String"
+			},
+			{
+				"name": "DateOfBirth",
+				"type": "String"
+			}
+		]
+	}
+}

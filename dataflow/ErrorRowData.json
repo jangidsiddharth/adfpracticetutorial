@@ -1,0 +1,104 @@
+{
+	"name": "ErrorRowData",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ErrorRowTableDS",
+						"type": "DatasetReference"
+					},
+					"name": "ErrorDataSet"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ErrorRowTableDS",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "GoodRowTableDS",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "split1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          stuId as string,",
+				"          stuName as string,",
+				"          age as string,",
+				"          email as string,",
+				"          DateOfBirth as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> ErrorDataSet",
+				"ErrorDataSet split(isNull(toDate(DateOfBirth,'dd-MM-yyyy')),",
+				"     disjoint: false) ~> split1@(ErrorRow, GoodRow)",
+				"split1@ErrorRow derive(stuId = toInteger(stuId),",
+				"          age = toInteger(age)) ~> derivedColumn1",
+				"split1@GoodRow derive(stuId = toInteger(stuId),",
+				"          age = toInteger(age),",
+				"          DateOfBirth = toDate(DateOfBirth,'dd-MM-yyyy')) ~> derivedColumn2",
+				"derivedColumn1 sink(allowSchemaDrift: false,",
+				"     validateSchema: false,",
+				"     input(",
+				"          stuId as string,",
+				"          stuName as string,",
+				"          age as string,",
+				"          email as string,",
+				"          DateOfBirth as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          stuId,",
+				"          stuName,",
+				"          age,",
+				"          email,",
+				"          DateOfBirth",
+				"     )) ~> sink1",
+				"derivedColumn2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          stuId as integer,",
+				"          stuName as string,",
+				"          age as integer,",
+				"          email as string,",
+				"          DOB as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          stuId,",
+				"          stuName,",
+				"          age,",
+				"          email,",
+				"          DOB = DateOfBirth",
+				"     )) ~> sink2"
+			]
+		}
+	}
+}
