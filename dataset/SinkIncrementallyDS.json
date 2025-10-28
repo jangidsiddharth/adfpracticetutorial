@@ -1,0 +1,22 @@
+{
+	"name": "SinkIncrementallyDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SinkIncrementallyLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "incrementallycopyfiles"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
