@@ -8,6 +8,9 @@
 		"Aggregation_connectionString": {
 			"value": ""
 		},
+		"AzureBlobLS_connectionString": {
+			"value": ""
+		},
 		"AzureDatabricks1_accessToken": {
 			"value": ""
 		},
@@ -27,6 +30,12 @@
 			"value": ""
 		},
 		"PrametersSqlTables_password": {
+			"value": ""
+		},
+		"SinkIncrementallyCopyDataLS_connectionString": {
+			"value": ""
+		},
+		"SinkIncrementallyLS_connectionString": {
 			"value": ""
 		},
 		"SqlServer1_password": {

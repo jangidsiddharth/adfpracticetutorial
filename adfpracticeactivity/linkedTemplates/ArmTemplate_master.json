@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Aggregation'"
 		},
+		"AzureBlobLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobLS'"
+		},
 		"AzureDatabricks1_accessToken": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
@@ -38,6 +42,14 @@
 		"PrametersSqlTables_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'PrametersSqlTables'"
+		},
+		"SinkIncrementallyCopyDataLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SinkIncrementallyCopyDataLS'"
+		},
+		"SinkIncrementallyLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SinkIncrementallyLS'"
 		},
 		"SqlServer1_password": {
 			"type": "secureString",
@@ -189,6 +201,9 @@
 					"Aggregation_connectionString": {
 						"value": "[parameters('Aggregation_connectionString')]"
 					},
+					"AzureBlobLS_connectionString": {
+						"value": "[parameters('AzureBlobLS_connectionString')]"
+					},
 					"AzureDatabricks1_accessToken": {
 						"value": "[parameters('AzureDatabricks1_accessToken')]"
 					},
@@ -209,6 +224,12 @@
 					},
 					"PrametersSqlTables_password": {
 						"value": "[parameters('PrametersSqlTables_password')]"
+					},
+					"SinkIncrementallyCopyDataLS_connectionString": {
+						"value": "[parameters('SinkIncrementallyCopyDataLS_connectionString')]"
+					},
+					"SinkIncrementallyLS_connectionString": {
+						"value": "[parameters('SinkIncrementallyLS_connectionString')]"
 					},
 					"SqlServer1_password": {
 						"value": "[parameters('SqlServer1_password')]"
