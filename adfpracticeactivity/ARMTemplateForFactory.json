@@ -31,6 +31,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ErrorRowDataLS'"
 		},
+		"FixedLengthFileLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'FixedLengthFileLS'"
+		},
+		"FixedLengthLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'FixedLengthLS'"
+		},
 		"GetMetaDataSqlServerLinkedService_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'GetMetaDataSqlServerLinkedService'"
@@ -42,6 +50,10 @@
 		"PrametersSqlTables_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'PrametersSqlTables'"
+		},
+		"SinkFixedLengthTextData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SinkFixedLengthTextData'"
 		},
 		"SinkIncrementallyCopyDataLS_connectionString": {
 			"type": "secureString",
@@ -1544,6 +1556,39 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/FixedLengthDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FixedLengthLS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "FixedLengthData.txt",
+						"container": "fixedlengthtextfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "1001Rahul   MP7789012340",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FixedLengthLS')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/GoodRowTableDS')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1696,6 +1741,34 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/TableCopyUsingParameterized')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SinkFixedLengthDataSet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SinkFixedLengthTextData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "sink",
+						"container": "fixedlengthtextfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SinkFixedLengthTextData')]"
 			]
 		},
 		{
@@ -1886,6 +1959,32 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/FixedLengthFileLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('FixedLengthFileLS_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FixedLengthLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('FixedLengthLS_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/GetMetaDataSqlServerLinkedService')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1977,6 +2076,19 @@
 						"type": "SecureString",
 						"value": "[parameters('PrametersSqlTables_password')]"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SinkFixedLengthTextData')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('SinkFixedLengthTextData_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -2243,6 +2355,70 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ErrorRowTableDS')]",
 				"[concat(variables('factoryId'), '/datasets/GoodRowTableDS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FixedLengthText')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "FixedLengthDS",
+								"type": "DatasetReference"
+							},
+							"name": "InputFixedLengthData"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "SinkFixedLengthDataSet",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "derivedColumn1"
+						},
+						{
+							"name": "select1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          {1001Rahul   MP7789012340} as string",
+						"     ),",
+						"     allowSchemaDrift: false,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> InputFixedLengthData",
+						"InputFixedLengthData derive(empId = substring({1001Rahul   MP7789012340}, 1, 4),",
+						"          empName = substring({1001Rahul   MP7789012340}, 5, 8),",
+						"          city = substring({1001Rahul   MP7789012340}, 13, 2),",
+						"          phone = substring({1001Rahul   MP7789012340}, 15, 10)) ~> derivedColumn1",
+						"derivedColumn1 select(mapColumn(",
+						"          empId,",
+						"          empName,",
+						"          city,",
+						"          phone",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select1",
+						"select1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/FixedLengthDS')]",
+				"[concat(variables('factoryId'), '/datasets/SinkFixedLengthDataSet')]"
 			]
 		},
 		{

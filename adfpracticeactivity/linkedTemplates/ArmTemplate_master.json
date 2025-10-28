@@ -31,6 +31,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ErrorRowDataLS'"
 		},
+		"FixedLengthFileLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'FixedLengthFileLS'"
+		},
+		"FixedLengthLS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'FixedLengthLS'"
+		},
 		"GetMetaDataSqlServerLinkedService_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'GetMetaDataSqlServerLinkedService'"
@@ -42,6 +50,10 @@
 		"PrametersSqlTables_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'PrametersSqlTables'"
+		},
+		"SinkFixedLengthTextData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SinkFixedLengthTextData'"
 		},
 		"SinkIncrementallyCopyDataLS_connectionString": {
 			"type": "secureString",
@@ -216,6 +228,12 @@
 					"ErrorRowDataLS_connectionString": {
 						"value": "[parameters('ErrorRowDataLS_connectionString')]"
 					},
+					"FixedLengthFileLS_connectionString": {
+						"value": "[parameters('FixedLengthFileLS_connectionString')]"
+					},
+					"FixedLengthLS_connectionString": {
+						"value": "[parameters('FixedLengthLS_connectionString')]"
+					},
 					"GetMetaDataSqlServerLinkedService_password": {
 						"value": "[parameters('GetMetaDataSqlServerLinkedService_password')]"
 					},
@@ -224,6 +242,9 @@
 					},
 					"PrametersSqlTables_password": {
 						"value": "[parameters('PrametersSqlTables_password')]"
+					},
+					"SinkFixedLengthTextData_connectionString": {
+						"value": "[parameters('SinkFixedLengthTextData_connectionString')]"
 					},
 					"SinkIncrementallyCopyDataLS_connectionString": {
 						"value": "[parameters('SinkIncrementallyCopyDataLS_connectionString')]"
@@ -245,15 +266,6 @@
 					},
 					"jointransformation_connectionString": {
 						"value": "[parameters('jointransformation_connectionString')]"
-					},
-					"parameterized_connectionString": {
-						"value": "[parameters('parameterized_connectionString')]"
-					},
-					"sinkonpremise_LS_accountKey": {
-						"value": "[parameters('sinkonpremise_LS_accountKey')]"
-					},
-					"uniontransform_connectionString": {
-						"value": "[parameters('uniontransform_connectionString')]"
 					},
 					"AzureSqlDatabase1_properties_typeProperties_server": {
 						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
@@ -317,9 +329,6 @@
 					},
 					"SqlServerConnection_properties_typeProperties_userName": {
 						"value": "[parameters('SqlServerConnection_properties_typeProperties_userName')]"
-					},
-					"sinkonpremise_LS_properties_typeProperties_url": {
-						"value": "[parameters('sinkonpremise_LS_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -338,6 +347,18 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"parameterized_connectionString": {
+						"value": "[parameters('parameterized_connectionString')]"
+					},
+					"sinkonpremise_LS_accountKey": {
+						"value": "[parameters('sinkonpremise_LS_accountKey')]"
+					},
+					"uniontransform_connectionString": {
+						"value": "[parameters('uniontransform_connectionString')]"
+					},
+					"sinkonpremise_LS_properties_typeProperties_url": {
+						"value": "[parameters('sinkonpremise_LS_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -363,6 +384,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'adfpracticeactivity_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "adfpracticeactivity_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfpracticeactivity_ArmTemplate_2')]"
 			]
 		}
 	]

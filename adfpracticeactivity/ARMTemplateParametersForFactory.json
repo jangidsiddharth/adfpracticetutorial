@@ -23,6 +23,12 @@
 		"ErrorRowDataLS_connectionString": {
 			"value": ""
 		},
+		"FixedLengthFileLS_connectionString": {
+			"value": ""
+		},
+		"FixedLengthLS_connectionString": {
+			"value": ""
+		},
 		"GetMetaDataSqlServerLinkedService_password": {
 			"value": ""
 		},
@@ -30,6 +36,9 @@
 			"value": ""
 		},
 		"PrametersSqlTables_password": {
+			"value": ""
+		},
+		"SinkFixedLengthTextData_connectionString": {
 			"value": ""
 		},
 		"SinkIncrementallyCopyDataLS_connectionString": {
