@@ -1,0 +1,23 @@
+{
+	"name": "SinkFixedLengthDataSet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SinkFixedLengthTextData",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "sink",
+				"container": "fixedlengthtextfiles"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

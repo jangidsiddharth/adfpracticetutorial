@@ -1,0 +1,58 @@
+{
+	"name": "FixedLengthText",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "FixedLengthDS",
+						"type": "DatasetReference"
+					},
+					"name": "InputFixedLengthData"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SinkFixedLengthDataSet",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {1001Rahul   MP7789012340} as string",
+				"     ),",
+				"     allowSchemaDrift: false,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> InputFixedLengthData",
+				"InputFixedLengthData derive(empId = substring({1001Rahul   MP7789012340}, 1, 4),",
+				"          empName = substring({1001Rahul   MP7789012340}, 5, 8),",
+				"          city = substring({1001Rahul   MP7789012340}, 13, 2),",
+				"          phone = substring({1001Rahul   MP7789012340}, 15, 10)) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          empId,",
+				"          empName,",
+				"          city,",
+				"          phone",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

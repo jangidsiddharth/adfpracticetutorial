@@ -1,0 +1,28 @@
+{
+	"name": "FixedLengthDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FixedLengthLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "FixedLengthData.txt",
+				"container": "fixedlengthtextfiles"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "1001Rahul   MP7789012340",
+				"type": "String"
+			}
+		]
+	}
+}
