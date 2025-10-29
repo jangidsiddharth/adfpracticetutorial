@@ -1,0 +1,30 @@
+{
+	"name": "EmpSqlTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerConnection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "empId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ename",
+				"type": "text"
+			},
+			{
+				"name": "email",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Employee"
+		}
+	}
+}
