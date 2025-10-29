@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'uniontransform'"
 		},
+		"EmpBlobSource_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EmpBlobSource'"
+		},
 		"sinkonpremise_LS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://storagepracticeactivity.dfs.core.windows.net/"
@@ -69,6 +73,31 @@
 				"typeProperties": {
 					"connectionString": "[parameters('uniontransform_connectionString')]"
 				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmpBlobSource')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('EmpBlobSource_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
 			},
 			"dependsOn": []
 		},
@@ -612,85 +641,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/uniontransform')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ErrorRowTableDS')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ErrorRowDataLS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "dbo.ErrorRow.csv",
-						"folderPath": "employee",
-						"container": "onpremisetarget"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "stuId",
-						"type": "String"
-					},
-					{
-						"name": "stuName",
-						"type": "String"
-					},
-					{
-						"name": "age",
-						"type": "String"
-					},
-					{
-						"name": "email",
-						"type": "String"
-					},
-					{
-						"name": "DateOfBirth",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/FixedLengthDS')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "FixedLengthLS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "FixedLengthData.txt",
-						"container": "fixedlengthtextfiles"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": false,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "1001Rahul   MP7789012340",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
 		}
 	]
 }

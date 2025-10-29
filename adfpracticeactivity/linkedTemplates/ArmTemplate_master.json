@@ -95,6 +95,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'uniontransform'"
 		},
+		"EmpBlobSource_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EmpBlobSource'"
+		},
 		"AzureSqlDatabase1_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "sqlpracticeactivity.database.windows.net"
@@ -356,6 +360,9 @@
 					},
 					"uniontransform_connectionString": {
 						"value": "[parameters('uniontransform_connectionString')]"
+					},
+					"EmpBlobSource_connectionString": {
+						"value": "[parameters('EmpBlobSource_connectionString')]"
 					},
 					"sinkonpremise_LS_properties_typeProperties_url": {
 						"value": "[parameters('sinkonpremise_LS_properties_typeProperties_url')]"

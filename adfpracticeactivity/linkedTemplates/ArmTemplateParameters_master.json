@@ -71,6 +71,9 @@
 		"uniontransform_connectionString": {
 			"value": ""
 		},
+		"EmpBlobSource_connectionString": {
+			"value": ""
+		},
 		"AzureSqlDatabase1_properties_typeProperties_server": {
 			"value": "sqlpracticeactivity.database.windows.net"
 		},

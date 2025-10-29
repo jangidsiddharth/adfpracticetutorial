@@ -95,6 +95,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'uniontransform'"
 		},
+		"EmpBlobSource_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EmpBlobSource'"
+		},
 		"AzureSqlDatabase1_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "sqlpracticeactivity.database.windows.net"
@@ -2735,6 +2739,177 @@
 				"[concat(variables('factoryId'), '/datasets/DelimitedText9')]",
 				"[concat(variables('factoryId'), '/datasets/DelimitedText11')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SCDtype1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Slowly Dimension Change table. ",
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "EmpBlobSource",
+								"type": "DatasetReference"
+							},
+							"name": "EmpBlobSource"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "EmpSqlTable",
+								"type": "DatasetReference"
+							},
+							"name": "EmpSqlSink"
+						}
+					],
+					"transformations": [
+						{
+							"name": "alterRow1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          empId as integer,",
+						"          ename as string,",
+						"          email as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> EmpBlobSource",
+						"EmpBlobSource alterRow(upsertIf(1==1)) ~> alterRow1",
+						"alterRow1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          empId as integer,",
+						"          ename as string,",
+						"          email as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:false,",
+						"     updateable:false,",
+						"     upsertable:true,",
+						"     keys:['empId'],",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     mapColumn(",
+						"          empId,",
+						"          ename,",
+						"          email",
+						"     )) ~> EmpSqlSink"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/EmpBlobSource')]",
+				"[concat(variables('factoryId'), '/datasets/EmpSqlTable')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmpBlobSource')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('EmpBlobSource_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmpBlobSource')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EmpBlobSource",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "dbo.Employee.csv",
+						"folderPath": "employee",
+						"container": "onpremisetarget"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "empId",
+						"type": "String"
+					},
+					{
+						"name": "ename",
+						"type": "String"
+					},
+					{
+						"name": "email",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EmpBlobSource')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmpSqlTable')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServerConnection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "empId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ename",
+						"type": "text"
+					},
+					{
+						"name": "email",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Employee"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServerConnection')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
 		}
 	]
 }
