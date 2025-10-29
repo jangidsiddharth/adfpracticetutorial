@@ -20,6 +20,9 @@
 		"CopyDataBlobToBlob_connectionString": {
 			"value": ""
 		},
+		"EmpBlobSource_connectionString": {
+			"value": ""
+		},
 		"ErrorRowDataLS_connectionString": {
 			"value": ""
 		},
@@ -69,9 +72,6 @@
 			"value": ""
 		},
 		"uniontransform_connectionString": {
-			"value": ""
-		},
-		"EmpBlobSource_connectionString": {
 			"value": ""
 		},
 		"AzureSqlDatabase1_properties_typeProperties_server": {

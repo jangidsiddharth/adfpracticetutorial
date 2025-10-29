@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CopyDataBlobToBlob'"
 		},
+		"EmpBlobSource_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EmpBlobSource'"
+		},
 		"ErrorRowDataLS_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ErrorRowDataLS'"
@@ -78,10 +82,6 @@
 		"filtersortdataflow_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'filtersortdataflow'"
-		},
-		"jointransformation_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'jointransformation'"
 		},
 		"AzureSqlDatabase1_properties_typeProperties_server": {
 			"type": "string",
@@ -252,6 +252,19 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('CopyDataBlobToBlob_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmpBlobSource')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('EmpBlobSource_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -497,19 +510,6 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('filtersortdataflow_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/jointransformation')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('jointransformation_connectionString')]"
 				}
 			},
 			"dependsOn": []
